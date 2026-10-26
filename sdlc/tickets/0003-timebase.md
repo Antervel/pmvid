@@ -148,11 +148,11 @@ Expected: all pass.
 
 ## Acceptance criteria
 
-- [ ] `frame_sample_range` uses only integer arithmetic.
-- [ ] Consecutive frame ranges are contiguous at 24, 30, and 60 fps.
-- [ ] A 10-minute track has zero cumulative drift at 24 and 30 fps.
-- [ ] `total_frames` never produces a last frame that reads past the PCM end.
-- [ ] Tests cover 30 fps, 24 fps, a partial frame, and empty input.
+- [x] `frame_sample_range` uses only integer arithmetic.
+- [x] Consecutive frame ranges are contiguous at 24, 30, and 60 fps.
+- [x] A 10-minute track has zero cumulative drift at 24 and 30 fps.
+- [x] `total_frames` never produces a last frame that reads past the PCM end.
+- [x] Tests cover 30 fps, 24 fps, a partial frame, and empty input.
 
 ## Notes for the implementer
 

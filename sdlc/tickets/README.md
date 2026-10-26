@@ -124,7 +124,7 @@ xvfb-run -a cargo run --features projectm -- -i song.mp3 -o song.mp4
 
 ### Pure-Rust core (no native libraries)
 
-- [ ] [0003 — Frame/sample timebase math](0003-timebase.md)
+- [x] [0003 — Frame/sample timebase math](0003-timebase.md) — differed from plan: added 60 fps contiguity test to satisfy acceptance criteria.
 - [ ] [0004 — Decode audio to interleaved f32](0004-audio-decode.md)
 - [ ] [0005 — Convert decoded audio to stereo](0005-audio-stereo.md)
 - [ ] [0006 — Resample to 44.1 kHz](0006-audio-resample.md)

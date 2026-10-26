@@ -9,6 +9,8 @@ pub const SAMPLE_RATE: u32 = 44_100;
 /// Number of interleaved channels fed to projectM.
 pub const CHANNELS: usize = 2;
 
+pub mod timebase;
+
 #[cfg(test)]
 mod tests {
     #[test]
