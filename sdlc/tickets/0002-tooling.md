@@ -119,11 +119,11 @@ Remove the temporary function afterwards.
 
 ## Acceptance criteria
 
-- [ ] `rustfmt.toml` and `clippy.toml` exist and use stable options.
-- [ ] `scripts/check.sh` is executable and exits 0 on the current tree.
-- [ ] The script runs fmt check, Clippy with `-D warnings`, and tests.
-- [ ] `Justfile` (if added) calls the same commands.
-- [ ] The ticket README's standard commands match the script.
+- [x] `rustfmt.toml` and `clippy.toml` exist and use stable options.
+- [x] `scripts/check.sh` is executable and exits 0 on the current tree.
+- [x] The script runs fmt check, Clippy with `-D warnings`, and tests.
+- [x] `Justfile` (if added) calls the same commands.
+- [x] The ticket README's standard commands match the script.
 
 ## Notes for the implementer
 
