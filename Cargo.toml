@@ -1,0 +1,45 @@
+[package]
+name = "pmvid"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.75"
+license = "MIT OR Apache-2.0"
+description = "Render projectM visualizations for an audio file into an MP4"
+
+[lib]
+name = "pmvid"
+path = "src/lib.rs"
+
+[[bin]]
+name = "pmvid"
+path = "src/main.rs"
+required-features = ["projectm"]
+
+[features]
+default = []
+projectm = [
+    "dep:projectm",
+    "dep:projectm-sys",
+    "dep:khronos-egl",
+    "dep:gl",
+]
+
+[dependencies]
+anyhow = "1"
+clap = { version = "4", features = ["derive"] }
+symphonia = { version = "0.5.5", features = ["mp3"] }
+rand = "0.8"
+indicatif = "0.17"
+
+# Native renderer dependencies. Keep them optional so `cargo test` works
+# without projectM/EGL installed.
+projectm = { version = "3.1.2", optional = true }
+projectm-sys = { version = "1.0.7", optional = true }
+khronos-egl = { version = "6", features = ["dynamic"], optional = true }
+gl = { version = "0.14", optional = true }
+
+[dev-dependencies]
+assert_cmd = "2"
+predicates = "3"
+tempfile = "3"
+hound = "3.5"

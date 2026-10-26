@@ -191,12 +191,12 @@ Do not run `cargo build --features projectm` in CI yet.
 
 ## Acceptance criteria
 
-- [ ] `cargo test --all-targets` passes with default features.
-- [ ] `cargo clippy --all-targets -- -D warnings` passes.
-- [ ] `cargo fmt --all -- --check` passes.
-- [ ] `Cargo.toml` has a `projectm` feature and all native deps are optional.
-- [ ] `src/lib.rs` exposes `SAMPLE_RATE = 44_100` and `CHANNELS = 2`.
-- [ ] No native library is required to run the default test suite.
+- [x] `cargo test --all-targets` passes with default features.
+- [x] `cargo clippy --all-targets -- -D warnings` passes.
+- [x] `cargo fmt --all -- --check` passes.
+- [x] `Cargo.toml` has a `projectm` feature and all native deps are optional.
+- [x] `src/lib.rs` exposes `SAMPLE_RATE = 44_100` and `CHANNELS = 2`.
+- [x] No native library is required to run the default test suite.
 
 ## Notes for the implementer
 

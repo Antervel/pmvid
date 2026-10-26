@@ -119,7 +119,7 @@ xvfb-run -a cargo run --features projectm -- -i song.mp3 -o song.mp4
 
 ### Setup
 
-- [ ] [0001 — Cargo scaffold and feature flags](0001-cargo-scaffold.md)
+- [x] [0001 — Cargo scaffold and feature flags](0001-cargo-scaffold.md) — differed from plan: no repository field; projectm-sys resolved to 1.2.2; projectm build fails until 0018a.
 - [ ] [0002 — Formatting, linting, and check script](0002-tooling.md)
 
 ### Pure-Rust core (no native libraries)

@@ -1,0 +1,8 @@
+/target
+*.mp4
+*.ppm
+*.wav
+*.mp3
+*.flac
+*.ogg
+/presets
