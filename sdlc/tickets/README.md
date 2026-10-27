@@ -136,7 +136,7 @@ xvfb-run -a cargo run --features projectm -- -i song.mp3 -o song.mp4
 - [x] [0012 — ffmpeg encoder process](0012-encoder-process.md)
 - [x] [0013 — CLI parsing with clap](0013-cli-parse.md)
 - [x] [0014 — CLI validation](0014-cli-validate.md)
-- [ ] [0015 — Progress reporting](0015-progress.md)
+- [x] [0015 — Progress reporting](0015-progress.md)
 - [ ] [0016 — Render config and seed resolution](0016-render-config.md)
 
 ### Native spike and renderer

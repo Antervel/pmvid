@@ -120,10 +120,10 @@ cargo run --features projectm -- -i song.mp3 -o song.mp4
 
 ## Acceptance criteria
 
-- [ ] `Progress::hidden()` produces no output and never panics.
-- [ ] `Progress::new` uses a static template and does not allocate per frame.
-- [ ] `set_frame` and `finish` are safe to call in any order.
-- [ ] The app can choose hidden mode based on `stderr().is_terminal()`.
+- [x] `Progress::hidden()` produces no output and never panics.
+- [x] `Progress::new` uses a static template and does not allocate per frame.
+- [x] `set_frame` and `finish` are safe to call in any order.
+- [x] The app can choose hidden mode based on `stderr().is_terminal()`.
 
 ## Notes for the implementer
 
