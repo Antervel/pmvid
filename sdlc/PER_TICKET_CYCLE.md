@@ -12,5 +12,6 @@
  - ocr review can fail transiently (task_done FAILED / LLM error / JSON parse / timeout) → re-run same command; --resume <sid> --from/--to/--commit if needed.
  - Review may hit tool-request caps / LLM parse errors but still emit findings/completion.
  - ocr review skips sdlc/tickets/**.
+- Delegation to the sdlc-ticket-solver agent may take up to ~45 min; use a longer wait timeout when polling for completion.
 
 Important: Delegate the task to the sdlc-ticket-solver agent. Do not do it yourself.
