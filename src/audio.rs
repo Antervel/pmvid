@@ -218,9 +218,11 @@ pub fn resample_linear(
     }
 
     let in_frames = input.len() / channels;
-    let out_frames = ((in_frames as u128 * u128::from(to_rate)) / u128::from(from_rate)) as usize;
+    let out_frames = (in_frames as u128) * u128::from(to_rate) / u128::from(from_rate);
     let ratio = f64::from(from_rate) / f64::from(to_rate);
 
+    let out_frames = usize::try_from(out_frames)
+        .map_err(|_| anyhow!("resampled frame count overflows usize"))?;
     let out_len = out_frames.checked_mul(channels).ok_or_else(|| {
         anyhow!(
             "resampled buffer size {} * {} overflows usize",
