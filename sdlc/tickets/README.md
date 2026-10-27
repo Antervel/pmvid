@@ -132,7 +132,7 @@ xvfb-run -a cargo run --features projectm -- -i song.mp3 -o song.mp4
 - [x] [0008 — Scan preset directory](0008-preset-scan.md) — differed from plan: added doc comment on private `walk`.
 - [x] [0009 — Seeded preset ordering](0009-preset-order.md)
 - [x] [0010 — Timed preset schedule](0010-preset-schedule.md)
-- [ ] [0011 — ffmpeg argument builder](0011-ffmpeg-args.md)
+- [x] [0011 — ffmpeg argument builder](0011-ffmpeg-args.md) — differed from plan: added frame-size overflow regression test.
 - [ ] [0012 — ffmpeg encoder process](0012-encoder-process.md)
 - [ ] [0013 — CLI parsing with clap](0013-cli-parse.md)
 - [ ] [0014 — CLI validation](0014-cli-validate.md)

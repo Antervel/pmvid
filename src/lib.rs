@@ -10,6 +10,7 @@ pub const SAMPLE_RATE: u32 = 44_100;
 pub const CHANNELS: usize = 2;
 
 pub mod audio;
+pub mod encoder;
 pub mod presets;
 pub mod timebase;
 
