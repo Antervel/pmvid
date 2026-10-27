@@ -263,13 +263,13 @@ cargo test --all-targets
 
 ## Acceptance criteria
 
-- [ ] `RenderConfig::from_cli` rejects a missing input file.
-- [ ] It rejects a non-existent output directory.
-- [ ] It rejects identical input and output paths.
-- [ ] A provided `--seed` is preserved exactly.
-- [ ] A missing `--seed` produces some `u64` seed.
-- [ ] `encoder_config()` carries width, height, fps, crf, paths, and ffmpeg.
-- [ ] `frame_bytes()` matches the encoder's frame size.
+- [x] `RenderConfig::from_cli` rejects a missing input file.
+- [x] It rejects a non-existent output directory.
+- [x] It rejects identical input and output paths.
+- [x] A provided `--seed` is preserved exactly.
+- [x] A missing `--seed` produces some `u64` seed.
+- [x] `encoder_config()` carries width, height, fps, crf, paths, and ffmpeg.
+- [x] `frame_bytes()` matches the encoder's frame size.
 
 ## Notes for the implementer
 

@@ -137,7 +137,7 @@ xvfb-run -a cargo run --features projectm -- -i song.mp3 -o song.mp4
 - [x] [0013 — CLI parsing with clap](0013-cli-parse.md)
 - [x] [0014 — CLI validation](0014-cli-validate.md)
 - [x] [0015 — Progress reporting](0015-progress.md)
-- [ ] [0016 — Render config and seed resolution](0016-render-config.md)
+- [x] [0016 — Render config and seed resolution](0016-render-config.md) — differed from plan: added encoder input/output/ffmpeg assertions to the encoder config test.
 
 ### Native spike and renderer
 

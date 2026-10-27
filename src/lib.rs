@@ -11,6 +11,7 @@ pub const CHANNELS: usize = 2;
 
 pub mod audio;
 pub mod cli;
+pub mod config;
 pub mod encoder;
 pub mod presets;
 pub mod progress;
