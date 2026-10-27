@@ -161,13 +161,13 @@ cargo test --all-targets
 
 ## Acceptance criteria
 
-- [ ] Defaults pass validation.
-- [ ] Zero or odd width/height are rejected with a message mentioning evenness.
-- [ ] Zero fps is rejected.
-- [ ] `NaN`, infinite, zero, and negative preset durations are rejected.
-- [ ] `NaN`, infinite, zero, and negative beat sensitivities are rejected.
-- [ ] CRF above 51 is rejected.
-- [ ] An empty ffmpeg path is rejected by clap.
+- [x] Defaults pass validation.
+- [x] Zero or odd width/height are rejected with a message mentioning evenness.
+- [x] Zero fps is rejected.
+- [x] `NaN`, infinite, zero, and negative preset durations are rejected.
+- [x] `NaN`, infinite, zero, and negative beat sensitivities are rejected.
+- [x] CRF above 51 is rejected.
+- [x] An empty ffmpeg path is rejected by clap.
 
 ## Notes for the implementer
 
