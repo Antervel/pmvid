@@ -13,6 +13,7 @@ pub mod audio;
 pub mod cli;
 pub mod encoder;
 pub mod presets;
+pub mod progress;
 pub mod timebase;
 
 #[cfg(test)]
