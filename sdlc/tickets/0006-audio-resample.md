@@ -136,12 +136,12 @@ cargo test --all-targets
 
 ## Acceptance criteria
 
-- [ ] 48 kHz → 44.1 kHz produces `44_100` frames for one second of input.
-- [ ] 44.1 kHz → 48 kHz produces `48_000` frames for one second of input.
-- [ ] Identical rates return the input unchanged.
-- [ ] Constant signals stay constant within `1e-6`.
-- [ ] Left and right channels do not leak into each other.
-- [ ] Zero rates/channels and partial frames are rejected.
+- [x] 48 kHz → 44.1 kHz produces `44_100` frames for one second of input.
+- [x] 44.1 kHz → 48 kHz produces `48_000` frames for one second of input.
+- [x] Identical rates return the input unchanged.
+- [x] Constant signals stay constant within `1e-6`.
+- [x] Left and right channels do not leak into each other.
+- [x] Zero rates/channels and partial frames are rejected.
 
 ## Notes for the implementer
 
