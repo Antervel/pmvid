@@ -118,8 +118,9 @@ impl PresetSchedule {
             return None;
         }
 
+        let next_switch_frame = self.next_switch_frame.checked_add(self.frames_per_preset)?;
+        self.next_switch_frame = next_switch_frame;
         self.index = (self.index + 1) % self.presets.len();
-        self.next_switch_frame += self.frames_per_preset;
         Some(self.current())
     }
 }
