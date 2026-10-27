@@ -17,6 +17,9 @@ pub mod presets;
 pub mod progress;
 pub mod timebase;
 
+#[cfg(feature = "projectm")]
+pub mod gl_ctx;
+
 #[cfg(test)]
 mod tests {
     #[test]

@@ -395,12 +395,12 @@ Record in the ticket notes which path worked and the reported GL renderer
 
 ## Acceptance criteria
 
-- [ ] The example creates an EGL display without an X11/Wayland window.
-- [ ] It creates an OpenGL 3.3 core context and an FBO.
-- [ ] `glReadPixels` returns a non-black pixel.
-- [ ] A valid 64×64 PPM is written.
-- [ ] The program exits non-zero with a clear error if EGL/GL fails.
-- [ ] The code is behind `#[cfg(feature = "projectm")]`.
+- [x] The example creates an EGL display without an X11/Wayland window.
+- [x] It creates an OpenGL 3.3 core context and an FBO.
+- [x] `glReadPixels` returns a non-black pixel.
+- [x] A valid 64×64 PPM is written.
+- [x] The program exits non-zero with a clear error if EGL/GL fails.
+- [x] The code is behind `#[cfg(feature = "projectm")]`.
 
 ## Notes for the implementer
 

@@ -15,6 +15,11 @@ name = "pmvid"
 path = "src/main.rs"
 required-features = ["projectm"]
 
+[[example]]
+name = "gl_smoke"
+path = "examples/gl_smoke.rs"
+required-features = ["projectm"]
+
 [features]
 default = []
 projectm = [

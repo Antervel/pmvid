@@ -141,7 +141,7 @@ xvfb-run -a cargo run --features projectm -- -i song.mp3 -o song.mp4
 
 ### Native spike and renderer
 
-- [ ] [0017 — Headless EGL + FBO smoke test](0017-gl-smoke.md)
+- [x] [0017 — Headless EGL + FBO smoke test](0017-gl-smoke.md) — differed from plan: headless EGL run used Mesa llvmpipe and reported GL 4.5 core.
 - [ ] [0018 — projectM build/API spike](0018-projectm-spike.md)
 - [ ] [0018a — Pin and vendor the projectM native build](0018a-projectm-pin.md)
 - [ ] [0019 — Renderer initialization and one frame](0019-renderer-init.md)
