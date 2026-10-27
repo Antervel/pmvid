@@ -228,12 +228,12 @@ ffmpeg -hide_banner -f rawvideo -pix_fmt rgba -s 2x2 -r 1 -i /dev/zero \
 
 ## Acceptance criteria
 
-- [ ] The argument list matches the expected vector exactly.
-- [ ] The command maps video from stdin (`0:v:0`) and audio from the input file
+- [x] The argument list matches the expected vector exactly.
+- [x] The command maps video from stdin (`0:v:0`) and audio from the input file
       (`1:a:0`).
-- [ ] The output is H.264 (`libx264`, `yuv420p`) with AAC audio.
-- [ ] `-vf vflip` is present.
-- [ ] `frame_bytes()` returns `width * height * 4` and reports overflow.
+- [x] The output is H.264 (`libx264`, `yuv420p`) with AAC audio.
+- [x] `-vf vflip` is present.
+- [x] `frame_bytes()` returns `width * height * 4` and reports overflow.
 
 ## Notes for the implementer
 
