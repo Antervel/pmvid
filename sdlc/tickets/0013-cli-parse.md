@@ -213,11 +213,11 @@ not built yet, `cargo test` is enough for this ticket.
 
 ## Acceptance criteria
 
-- [ ] All PRD CLI flags are present with the documented short names.
-- [ ] Defaults match PRD section 7.
-- [ ] `-i` and `-o` are required.
-- [ ] `Cli::command().debug_assert()` passes (no clap configuration errors).
-- [ ] Non-numeric values are rejected by clap.
+- [x] All PRD CLI flags are present with the documented short names.
+- [x] Defaults match PRD section 7.
+- [x] `-i` and `-o` are required.
+- [x] `Cli::command().debug_assert()` passes (no clap configuration errors).
+- [x] Non-numeric values are rejected by clap.
 
 ## Notes for the implementer
 
