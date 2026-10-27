@@ -107,11 +107,11 @@ cargo test --all-targets
 
 ## Acceptance criteria
 
-- [ ] `shuffle` returns a permutation of its input.
-- [ ] The same seed returns the same order.
-- [ ] Different seeds can return different orders.
-- [ ] Empty and single-element inputs are handled.
-- [ ] No global RNG state is used.
+- [x] `shuffle` returns a permutation of its input.
+- [x] The same seed returns the same order.
+- [x] Different seeds can return different orders.
+- [x] Empty and single-element inputs are handled.
+- [x] No global RNG state is used.
 
 ## Notes for the implementer
 

@@ -130,7 +130,7 @@ xvfb-run -a cargo run --features projectm -- -i song.mp3 -o song.mp4
 - [x] [0006 — Resample to 44.1 kHz](0006-audio-resample.md)
 - [x] [0007 — Audio pipeline and MP3/WAV tests](0007-audio-pipeline.md)
 - [x] [0008 — Scan preset directory](0008-preset-scan.md) — differed from plan: added doc comment on private `walk`.
-- [ ] [0009 — Seeded preset ordering](0009-preset-order.md)
+- [x] [0009 — Seeded preset ordering](0009-preset-order.md)
 - [ ] [0010 — Timed preset schedule](0010-preset-schedule.md)
 - [ ] [0011 — ffmpeg argument builder](0011-ffmpeg-args.md)
 - [ ] [0012 — ffmpeg encoder process](0012-encoder-process.md)
