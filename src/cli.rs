@@ -2,6 +2,7 @@
 
 use std::path::PathBuf;
 
+use anyhow::{ensure, Result};
 use clap::Parser;
 
 /// Render a projectM visualization for an audio file into an MP4.
@@ -51,6 +52,33 @@ pub struct Cli {
     /// ffmpeg binary to use.
     #[arg(long, value_name = "PATH", default_value = "ffmpeg")]
     pub ffmpeg: PathBuf,
+}
+
+impl Cli {
+    /// Validate values that clap cannot express cleanly.
+    pub fn validate(&self) -> Result<()> {
+        ensure!(
+            self.width > 0 && self.height > 0,
+            "width and height must be greater than zero"
+        );
+        ensure!(
+            self.width % 2 == 0 && self.height % 2 == 0,
+            "width and height must be even for H.264 yuv420p (got {}x{})",
+            self.width,
+            self.height
+        );
+        ensure!(self.fps > 0, "fps must be greater than zero");
+        ensure!(
+            self.preset_duration.is_finite() && self.preset_duration > 0.0,
+            "preset duration must be a positive number of seconds"
+        );
+        ensure!(
+            self.beat_sensitivity.is_finite() && self.beat_sensitivity > 0.0,
+            "beat sensitivity must be a positive number"
+        );
+        ensure!(self.crf <= 51, "crf must be between 0 and 51");
+        Ok(())
+    }
 }
 
 #[cfg(test)]
@@ -170,5 +198,85 @@ mod tests {
             "not-a-number"
         ])
         .is_err());
+    }
+    fn valid_args() -> Vec<&'static str> {
+        vec!["pmvid", "-i", "song.mp3", "-o", "song.mp4"]
+    }
+
+    #[test]
+    fn defaults_are_valid() {
+        let cli = parse(&valid_args());
+        cli.validate().unwrap();
+    }
+
+    #[test]
+    fn accepts_a_non_16_by_9_even_resolution() {
+        let cli = parse(&[
+            "pmvid", "-i", "in.mp3", "-o", "out.mp4", "-W", "854", "-H", "480",
+        ]);
+        cli.validate().unwrap();
+    }
+
+    #[test]
+    fn rejects_zero_width_or_height() {
+        let cli = parse(&["pmvid", "-i", "in.mp3", "-o", "out.mp4", "-W", "0"]);
+        assert!(cli.validate().is_err());
+
+        let cli = parse(&["pmvid", "-i", "in.mp3", "-o", "out.mp4", "-H", "0"]);
+        assert!(cli.validate().is_err());
+    }
+
+    #[test]
+    fn rejects_odd_dimensions() {
+        let cli = parse(&["pmvid", "-i", "in.mp3", "-o", "out.mp4", "-W", "1279"]);
+        let err = cli.validate().unwrap_err();
+        assert!(format!("{err:#}").contains("must be even"));
+
+        let cli = parse(&["pmvid", "-i", "in.mp3", "-o", "out.mp4", "-H", "721"]);
+        assert!(cli.validate().is_err());
+    }
+
+    #[test]
+    fn rejects_zero_fps() {
+        let cli = parse(&["pmvid", "-i", "in.mp3", "-o", "out.mp4", "-f", "0"]);
+        let err = cli.validate().unwrap_err();
+        assert!(format!("{err:#}").contains("fps must be greater than zero"));
+    }
+
+    #[test]
+    fn rejects_bad_preset_duration() {
+        // Use the `--flag=value` form: clap treats a separate `-1` token as an
+        // unknown flag and would reject it during parsing, before `validate`.
+        for value in ["0", "-1", "NaN", "inf"] {
+            let arg = format!("--preset-duration={value}");
+            let cli = parse(&["pmvid", "-i", "in.mp3", "-o", "out.mp4", &arg]);
+            assert!(cli.validate().is_err(), "accepted duration {value}");
+        }
+    }
+
+    #[test]
+    fn rejects_bad_beat_sensitivity() {
+        for value in ["0", "-0.5", "NaN", "inf"] {
+            let arg = format!("--beat-sensitivity={value}");
+            let cli = parse(&["pmvid", "-i", "in.mp3", "-o", "out.mp4", &arg]);
+            assert!(cli.validate().is_err(), "accepted sensitivity {value}");
+        }
+    }
+
+    #[test]
+    fn rejects_crf_above_51() {
+        let cli = parse(&["pmvid", "-i", "in.mp3", "-o", "out.mp4", "--crf", "52"]);
+        let err = cli.validate().unwrap_err();
+        assert!(format!("{err:#}").contains("crf must be between 0 and 51"));
+    }
+
+    #[test]
+    fn rejects_empty_ffmpeg_path() {
+        // clap's `PathBuf` value parser already rejects an empty value, so this
+        // fails during parsing rather than in `validate`.
+        assert!(
+            Cli::try_parse_from(["pmvid", "-i", "in.mp3", "-o", "out.mp4", "--ffmpeg", ""])
+                .is_err()
+        );
     }
 }
