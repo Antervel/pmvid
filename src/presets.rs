@@ -298,4 +298,11 @@ mod tests {
         // 2.55 s at 30 fps = 76.5 -> 77 frames.
         assert_eq!(schedule(&["a.milk"], 2.55, 30).frames_per_preset(), 77);
     }
+    #[test]
+    fn advance_returns_none_on_frame_overflow() {
+        let mut schedule = schedule(&["a.milk"], 20.0, 30);
+        schedule.frames_per_preset = u64::MAX;
+        schedule.next_switch_frame = u64::MAX;
+        assert!(schedule.advance(u64::MAX).is_none());
+    }
 }
