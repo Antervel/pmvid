@@ -236,12 +236,12 @@ cargo test --all-targets
 
 ## Acceptance criteria
 
-- [ ] `Encoder::spawn` reports a clear error if ffmpeg cannot be started.
-- [ ] `write_frame` rejects a buffer of the wrong size before writing.
-- [ ] Frames written to the child arrive in order and with the correct length.
-- [ ] `finish` closes stdin, waits, and reports a non-zero exit status.
-- [ ] Dropping an encoder does not leave a child process running.
-- [ ] Tests use a fake ffmpeg and do not require the real binary.
+- [x] `Encoder::spawn` reports a clear error if ffmpeg cannot be started.
+- [x] `write_frame` rejects a buffer of the wrong size before writing.
+- [x] Frames written to the child arrive in order and with the correct length.
+- [x] `finish` closes stdin, waits, and reports a non-zero exit status.
+- [x] Dropping an encoder does not leave a child process running.
+- [x] Tests use a fake ffmpeg and do not require the real binary.
 
 ## Notes for the implementer
 
