@@ -154,3 +154,82 @@ pub fn decode_file(path: &Path) -> Result<DecodedAudio> {
         channels,
     })
 }
+
+/// Convert interleaved samples to interleaved stereo.
+///
+/// Mono is duplicated. Stereo is copied. For more than two channels, the first
+/// two channels are kept.
+pub fn to_stereo(samples: &[f32], channels: usize) -> Result<Vec<f32>> {
+    ensure!(channels > 0, "channel count must be greater than zero");
+    ensure!(
+        samples.len() % channels == 0,
+        "sample buffer length {} is not divisible by channel count {}",
+        samples.len(),
+        channels
+    );
+
+    match channels {
+        1 => {
+            let mut out = Vec::with_capacity(samples.len() * 2);
+            for &sample in samples {
+                out.push(sample);
+                out.push(sample);
+            }
+            Ok(out)
+        }
+        2 => Ok(samples.to_vec()),
+        _ => {
+            let frames = samples.len() / channels;
+            let mut out = Vec::with_capacity(frames * 2);
+            for frame in samples.chunks_exact(channels) {
+                out.push(frame[0]);
+                out.push(frame[1]);
+            }
+            Ok(out)
+        }
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn mono_is_duplicated() {
+        let out = to_stereo(&[0.1, -0.2, 0.3], 1).unwrap();
+        assert_eq!(out, vec![0.1, 0.1, -0.2, -0.2, 0.3, 0.3]);
+    }
+
+    #[test]
+    fn stereo_is_copied() {
+        let input = vec![0.1, 0.2, 0.3, 0.4];
+        let out = to_stereo(&input, 2).unwrap();
+        assert_eq!(out, input);
+    }
+
+    #[test]
+    fn extra_channels_keep_front_left_and_right() {
+        // 4-channel frames: FL, FR, RL, RR
+        let input = vec![
+            1.0, 2.0, 3.0, 4.0, //
+            5.0, 6.0, 7.0, 8.0,
+        ];
+        let out = to_stereo(&input, 4).unwrap();
+        assert_eq!(out, vec![1.0, 2.0, 5.0, 6.0]);
+    }
+
+    #[test]
+    fn rejects_zero_channels() {
+        assert!(to_stereo(&[0.0], 0).is_err());
+    }
+
+    #[test]
+    fn rejects_partial_frame() {
+        assert!(to_stereo(&[0.0, 0.0, 0.0], 2).is_err());
+    }
+
+    #[test]
+    fn empty_input_is_empty_stereo() {
+        assert_eq!(to_stereo(&[], 2).unwrap(), Vec::<f32>::new());
+    }
+}

@@ -124,11 +124,11 @@ cargo test --all-targets
 
 ## Acceptance criteria
 
-- [ ] Mono input produces `2 * input.len()` stereo samples.
-- [ ] Stereo input is returned unchanged.
-- [ ] Multi-channel input keeps the first two channels.
-- [ ] Zero channels and partial frames are rejected with clear errors.
-- [ ] Empty input is allowed and returns an empty vector.
+- [x] Mono input produces `2 * input.len()` stereo samples.
+- [x] Stereo input is returned unchanged.
+- [x] Multi-channel input keeps the first two channels.
+- [x] Zero channels and partial frames are rejected with clear errors.
+- [x] Empty input is allowed and returns an empty vector.
 
 ## Notes for the implementer
 

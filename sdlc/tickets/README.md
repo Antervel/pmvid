@@ -126,7 +126,7 @@ xvfb-run -a cargo run --features projectm -- -i song.mp3 -o song.mp4
 
 - [x] [0003 — Frame/sample timebase math](0003-timebase.md) — differed from plan: added 60 fps contiguity test to satisfy acceptance criteria.
 - [x] [0004 — Decode audio to interleaved f32](0004-audio-decode.md) — differed from plan: corrupt-packet test generates an MP3 with ffmpeg and flips a payload byte.
-- [ ] [0005 — Convert decoded audio to stereo](0005-audio-stereo.md)
+- [x] [0005 — Convert decoded audio to stereo](0005-audio-stereo.md)
 - [ ] [0006 — Resample to 44.1 kHz](0006-audio-resample.md)
 - [ ] [0007 — Audio pipeline and MP3/WAV tests](0007-audio-pipeline.md)
 - [ ] [0008 — Scan preset directory](0008-preset-scan.md)
