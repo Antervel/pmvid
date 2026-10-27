@@ -6,3 +6,4 @@
 *.flac
 *.ogg
 /presets
+.omp/
