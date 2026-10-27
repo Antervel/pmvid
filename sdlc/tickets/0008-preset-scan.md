@@ -171,11 +171,11 @@ cargo test --all-targets
 
 ## Acceptance criteria
 
-- [ ] Nested `.milk` files are found.
-- [ ] Non-`.milk` files are ignored.
-- [ ] The result is sorted, so repeated scans are deterministic.
-- [ ] Missing directory and empty directory return actionable errors.
-- [ ] Uppercase `.MILK` is accepted.
+- [x] Nested `.milk` files are found.
+- [x] Non-`.milk` files are ignored.
+- [x] The result is sorted, so repeated scans are deterministic.
+- [x] Missing directory and empty directory return actionable errors.
+- [x] Uppercase `.MILK` is accepted.
 
 ## Notes for the implementer
 
