@@ -134,7 +134,7 @@ xvfb-run -a cargo run --features projectm -- -i song.mp3 -o song.mp4
 - [x] [0010 — Timed preset schedule](0010-preset-schedule.md)
 - [x] [0011 — ffmpeg argument builder](0011-ffmpeg-args.md) — differed from plan: added frame-size overflow regression test.
 - [x] [0012 — ffmpeg encoder process](0012-encoder-process.md)
-- [ ] [0013 — CLI parsing with clap](0013-cli-parse.md)
+- [x] [0013 — CLI parsing with clap](0013-cli-parse.md)
 - [ ] [0014 — CLI validation](0014-cli-validate.md)
 - [ ] [0015 — Progress reporting](0015-progress.md)
 - [ ] [0016 — Render config and seed resolution](0016-render-config.md)
