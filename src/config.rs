@@ -80,7 +80,7 @@ impl RenderConfig {
 
     /// Number of bytes in one RGBA frame.
     pub fn frame_bytes(&self) -> Result<usize> {
-        self.encoder_config().frame_bytes()
+        crate::encoder::rgba_frame_bytes(self.width, self.height)
     }
 }
 

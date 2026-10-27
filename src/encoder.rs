@@ -19,15 +19,17 @@ pub struct EncoderConfig {
     pub crf: u8,
 }
 
+/// Number of bytes in one RGBA frame for the given resolution.
+pub(crate) fn rgba_frame_bytes(width: u32, height: u32) -> Result<usize> {
+    let pixels = (width as usize)
+        .checked_mul(height as usize)
+        .context("video resolution is too large")?;
+    pixels.checked_mul(4).context("frame size overflow")
+}
 impl EncoderConfig {
     /// Number of bytes in one RGBA frame.
     pub fn frame_bytes(&self) -> Result<usize> {
-        let pixels = (self.width as usize)
-            .checked_mul(self.height as usize)
-            .context("video resolution is too large")?;
-        pixels
-            .checked_mul(4)
-            .context("video resolution is too large")
+        rgba_frame_bytes(self.width, self.height)
     }
 
     /// Arguments passed to ffmpeg. Does not include the program path.
@@ -243,7 +245,7 @@ mod tests {
             ..config()
         };
         let err = cfg.frame_bytes().unwrap_err();
-        assert!(format!("{err:#}").contains("video resolution is too large"));
+        assert!(format!("{err:#}").contains("frame size overflow"));
     }
 
     #[test]
