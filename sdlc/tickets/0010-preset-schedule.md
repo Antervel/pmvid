@@ -176,11 +176,11 @@ cargo test --all-targets
 
 ## Acceptance criteria
 
-- [ ] The first preset is active at frame 0.
-- [ ] The first switch happens exactly at `frames_per_preset`.
-- [ ] The schedule wraps to the first preset after the last one.
-- [ ] A single preset is re-selected without panicking.
-- [ ] Invalid durations and fps values are rejected.
+- [x] The first preset is active at frame 0.
+- [x] The first switch happens exactly at `frames_per_preset`.
+- [x] The schedule wraps to the first preset after the last one.
+- [x] A single preset is re-selected without panicking.
+- [x] Invalid durations and fps values are rejected.
 
 ## Notes for the implementer
 
