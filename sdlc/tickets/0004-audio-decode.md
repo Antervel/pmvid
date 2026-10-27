@@ -283,12 +283,12 @@ cargo test --all-targets
 
 ## Acceptance criteria
 
-- [ ] `decode_file` returns interleaved `f32` at the file's native rate.
-- [ ] A 48 kHz stereo WAV decodes to 48,000 frames and 96,000 floats.
-- [ ] A mono WAV reports `channels == 1`.
-- [ ] A corrupt file returns an error containing `unsupported or corrupt audio file`.
-- [ ] A missing file returns an error containing `opening audio file`.
-- [ ] Decode errors from individual packets are warnings, not fatal.
+- [x] `decode_file` returns interleaved `f32` at the file's native rate.
+- [x] A 48 kHz stereo WAV decodes to 48,000 frames and 96,000 floats.
+- [x] A mono WAV reports `channels == 1`.
+- [x] A corrupt file returns an error containing `unsupported or corrupt audio file`.
+- [x] A missing file returns an error containing `opening audio file`.
+- [x] Decode errors from individual packets are warnings, not fatal.
 
 ## Notes for the implementer
 

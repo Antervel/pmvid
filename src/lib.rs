@@ -1,7 +1,7 @@
 //! `pmvid` renders a projectM visualization for an audio file into an MP4.
 //!
-//! The pure-Rust modules are always available. The native renderer lives behind
-//! the `projectm` feature.
+//! The pure-Rust modules are always available. The native renderer lives behind the `projectm`
+//! feature.
 
 /// Sample rate used for projectM analysis.
 pub const SAMPLE_RATE: u32 = 44_100;
@@ -9,6 +9,7 @@ pub const SAMPLE_RATE: u32 = 44_100;
 /// Number of interleaved channels fed to projectM.
 pub const CHANNELS: usize = 2;
 
+pub mod audio;
 pub mod timebase;
 
 #[cfg(test)]
