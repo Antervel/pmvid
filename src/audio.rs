@@ -3,7 +3,7 @@
 use std::fs::File;
 use std::path::Path;
 
-use anyhow::{bail, ensure, Context, Result};
+use anyhow::{anyhow, bail, ensure, Context, Result};
 use symphonia::core::audio::SampleBuffer;
 use symphonia::core::codecs::DecoderOptions;
 use symphonia::core::errors::Error as SymphoniaError;
@@ -221,7 +221,14 @@ pub fn resample_linear(
     let out_frames = ((in_frames as u128 * u128::from(to_rate)) / u128::from(from_rate)) as usize;
     let ratio = f64::from(from_rate) / f64::from(to_rate);
 
-    let mut out = vec![0.0_f32; out_frames * channels];
+    let out_len = out_frames.checked_mul(channels).ok_or_else(|| {
+        anyhow!(
+            "resampled buffer size {} * {} overflows usize",
+            out_frames,
+            channels
+        )
+    })?;
+    let mut out = vec![0.0_f32; out_len];
 
     for out_frame in 0..out_frames {
         let position = out_frame as f64 * ratio;
