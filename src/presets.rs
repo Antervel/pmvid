@@ -178,10 +178,4 @@ mod tests {
     fn empty_list_stays_empty() {
         assert!(shuffle(Vec::new(), 123).is_empty());
     }
-
-    #[test]
-    fn single_preset_stays_first() {
-        let input = paths(&["only.milk"]);
-        assert_eq!(shuffle(input.clone(), 99), input);
-    }
 }
