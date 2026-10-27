@@ -1,9 +1,11 @@
 //! ffmpeg process management.
 
 use std::ffi::OsString;
+use std::io::Write;
 use std::path::PathBuf;
+use std::process::{Child, ChildStdin, Command, Stdio};
 
-use anyhow::{Context, Result};
+use anyhow::{ensure, Context, Result};
 
 /// Everything needed to build the ffmpeg command line.
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -72,6 +74,88 @@ impl EncoderConfig {
         args.push(self.output.as_os_str().to_owned());
 
         args
+    }
+}
+
+/// A running ffmpeg process that accepts raw RGBA frames on stdin.
+#[derive(Debug)]
+pub struct Encoder {
+    child: Child,
+    stdin: Option<ChildStdin>,
+    frame_bytes: usize,
+    output: PathBuf,
+}
+
+impl Encoder {
+    /// Spawn ffmpeg with the configured arguments. Frames are written to its stdin.
+    pub fn spawn(config: &EncoderConfig) -> Result<Self> {
+        let frame_bytes = config.frame_bytes()?;
+
+        let mut child = Command::new(&config.ffmpeg)
+            .args(config.args())
+            .stdin(Stdio::piped())
+            .spawn()
+            .with_context(|| {
+                format!(
+                    "failed to spawn ffmpeg at '{}'; install ffmpeg or pass --ffmpeg <PATH>",
+                    config.ffmpeg.display()
+                )
+            })?;
+
+        let stdin = child.stdin.take().context("ffmpeg stdin was not piped")?;
+
+        Ok(Self {
+            child,
+            stdin: Some(stdin),
+            frame_bytes,
+            output: config.output.clone(),
+        })
+    }
+
+    /// Write exactly one raw RGBA frame to ffmpeg. The frame length must equal `frame_bytes`.
+    pub fn write_frame(&mut self, frame: &[u8]) -> Result<()> {
+        ensure!(
+            frame.len() == self.frame_bytes,
+            "frame has {} bytes, expected {}",
+            frame.len(),
+            self.frame_bytes
+        );
+
+        let stdin = self
+            .stdin
+            .as_mut()
+            .context("ffmpeg stdin is already closed")?;
+        stdin
+            .write_all(frame)
+            .context("writing frame to ffmpeg (did ffmpeg exit early?)")?;
+        Ok(())
+    }
+
+    /// Close stdin and wait for ffmpeg to finish writing the output file.
+    pub fn finish(mut self) -> Result<()> {
+        drop(self.stdin.take());
+
+        let status = self
+            .child
+            .wait()
+            .with_context(|| format!("waiting for ffmpeg to finish '{}'", self.output.display()))?;
+
+        ensure!(
+            status.success(),
+            "ffmpeg exited with {status}; output '{}' may be incomplete",
+            self.output.display()
+        );
+
+        Ok(())
+    }
+}
+
+impl Drop for Encoder {
+    fn drop(&mut self) {
+        // If a render error unwinds before finish(), do not leave ffmpeg running.
+        drop(self.stdin.take());
+        let _ = self.child.kill();
+        let _ = self.child.wait();
     }
 }
 
