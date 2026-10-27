@@ -3,6 +3,7 @@
 use std::fs::File;
 use std::path::Path;
 
+use crate::SAMPLE_RATE;
 use anyhow::{anyhow, bail, ensure, Context, Result};
 use symphonia::core::audio::SampleBuffer;
 use symphonia::core::codecs::DecoderOptions;
@@ -246,6 +247,41 @@ pub fn resample_linear(
     }
 
     Ok(out)
+}
+
+/// Audio ready for projectM: interleaved stereo `f32` at 44.1 kHz.
+#[derive(Debug, Clone, PartialEq)]
+pub struct PreparedAudio {
+    pub samples: Vec<f32>,
+    pub sample_rate: u32,
+    pub channels: usize,
+}
+
+impl PreparedAudio {
+    /// Number of sample frames (samples per channel).
+    pub fn frames(&self) -> u64 {
+        debug_assert!(self.channels > 0);
+        (self.samples.len() / self.channels) as u64
+    }
+}
+
+/// Decode any supported file, convert it to stereo, and resample to 44.1 kHz.
+pub fn prepare(path: &Path) -> Result<PreparedAudio> {
+    let decoded = decode_file(path)?;
+    let stereo = to_stereo(&decoded.samples, decoded.channels)?;
+    let samples = resample_linear(&stereo, decoded.sample_rate, SAMPLE_RATE, 2)?;
+
+    ensure!(
+        !samples.is_empty(),
+        "audio file '{}' produced no samples after resampling",
+        path.display()
+    );
+
+    Ok(PreparedAudio {
+        samples,
+        sample_rate: SAMPLE_RATE,
+        channels: 2,
+    })
 }
 
 #[cfg(test)]
