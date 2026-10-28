@@ -115,8 +115,8 @@ impl Renderer {
         );
 
         let window = &pcm[start..end];
-        let max_samples = ProjectM::pcm_get_max_samples() as usize;
-        for chunk in pcm_chunks(window, max_samples) {
+        let max_frames = ProjectM::pcm_get_max_samples() as usize / CHANNELS;
+        for chunk in pcm_chunks(window, max_frames) {
             self.pm.pcm_add_float(chunk, STEREO);
         }
 

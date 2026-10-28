@@ -284,17 +284,11 @@ pub fn prepare(path: &Path) -> Result<PreparedAudio> {
     })
 }
 
-/// Split interleaved stereo samples into chunks that fit projectM's buffer.
-///
-/// `max_samples_per_channel` is `ProjectM::pcm_get_max_samples()`. The wrapper
-/// asserts on the *total* interleaved length, so the chunk frame count is
-/// `max_samples_per_channel / 2`, capped at 512 frames for responsiveness.
-pub fn pcm_chunks(samples: &[f32], max_samples_per_channel: usize) -> impl Iterator<Item = &[f32]> {
-    debug_assert!(
-        max_samples_per_channel >= crate::CHANNELS,
-        "projectM PCM buffer is too small for stereo"
-    );
-    let chunk_frames = (max_samples_per_channel / crate::CHANNELS).clamp(1, 512);
+/// Split interleaved stereo samples into chunks of at most `max_frames` sample
+/// frames (one frame is `CHANNELS` interleaved samples), capped at 512 frames per
+/// chunk for responsiveness.
+pub fn pcm_chunks(samples: &[f32], max_frames: usize) -> impl Iterator<Item = &[f32]> {
+    let chunk_frames = max_frames.clamp(1, 512);
     samples.chunks(chunk_frames * crate::CHANNELS)
 }
 
@@ -411,7 +405,7 @@ mod tests {
     #[test]
     fn pcm_chunks_use_smaller_buffers_when_needed() {
         let samples = vec![0.0_f32; 1_000 * 2];
-        let chunks: Vec<_> = pcm_chunks(&samples, 512).collect();
+        let chunks: Vec<_> = pcm_chunks(&samples, 256).collect();
 
         assert!(chunks.iter().all(|chunk| chunk.len() <= 512));
         assert_eq!(
