@@ -192,12 +192,12 @@ Expected: a resolved path under `/usr/local/lib`, not "not found".
 
 ## Acceptance criteria
 
-- [ ] `docker build -t pmvid .` succeeds.
-- [ ] `docker run --rm pmvid --version` works.
-- [ ] `ldd` inside the image resolves `libprojectM`.
-- [ ] A short render works inside the container with no display.
-- [ ] The fast CI job runs fmt, Clippy, and tests.
-- [ ] The native CI job builds the pinned projectM dependency and is required.
+- [x] `docker build -t pmvid .` succeeds.
+- [x] `docker run --rm pmvid --version` works.
+- [x] `ldd` inside the image resolves `libprojectM`.
+- [x] A short render works inside the container with no display.
+- [x] The fast CI job runs fmt, Clippy, and tests.
+- [x] The native CI job builds the pinned projectM dependency and is required.
 
 ## Notes for the implementer
 
