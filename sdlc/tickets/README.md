@@ -156,7 +156,7 @@ xvfb-run -a cargo run --features projectm -- -i song.mp3 -o song.mp4
 - [x] [0025 — README, install docs, licenses](0025-docs.md) — differed from plan: docs/install.md skipped (KISS); README options block mirrors real --help output.
 - [x] [0026 — Dockerfile and headless CI](0026-docker.md) — differed from plan: builder image bumped from rust:1.85-bookworm to rust:1.94-bookworm (locked encoding_rs 0.8.42 needs rustc 1.88).
 - [x] [0027 — Extra audio formats](0027-extra-formats.md) — differed from plan: decode error message now lists AAC/M4A.
-- [ ] [0028 — Batch mode (P2, optional)](0028-batch.md)
+- [x] [0028 — Batch mode (P2, optional)](0028-batch.md) — done as specified; tests use fake pmvid and bash.
 - [ ] [0029 — Sync/acceptance test](0029-acceptance.md)
 - [ ] [0030 — Release polish](0030-release.md)
 

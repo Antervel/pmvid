@@ -90,6 +90,24 @@ Options:
 
 Output is H.264 video with AAC audio.
 
+## Batch mode
+
+```sh
+./scripts/batch.sh ./music ./videos --presets ./presets --seed 42
+```
+
+This renders every `.mp3`, `.flac`, `.wav`, `.ogg`, and `.m4a` in `./music`
+to `./videos/<name>.mp4`.
+
+The script loops over the supported audio files in the input directory (shallow
+scan only; it does not recurse into subdirectories) and calls the single-file
+CLI once per file, passing any extra arguments through so `--presets`,
+`--seed`, and quality flags keep working. It creates the output directory if
+it does not exist and skips non-audio files.
+
+Files that share a stem but differ in extension (for example `song.mp3` and
+`song.flac`) collide; the later render overwrites the earlier one.
+
 ## Presets
 
 Presets are not bundled. Download a MilkDrop preset pack and point

@@ -205,12 +205,12 @@ ls -l /tmp/batch-out
 
 ## Acceptance criteria
 
-- [ ] The script renders one MP4 per supported input file.
-- [ ] It ignores non-audio files.
-- [ ] It creates the output directory if needed.
-- [ ] It fails clearly for a missing input directory or an empty one.
-- [ ] The single-file CLI is unchanged.
-- [ ] The test uses a fake `pmvid` and does not need projectM/ffmpeg.
+- [x] The script renders one MP4 per supported input file.
+- [x] It ignores non-audio files.
+- [x] It creates the output directory if needed.
+- [x] It fails clearly for a missing input directory or an empty one.
+- [x] The single-file CLI is unchanged.
+- [x] The test uses a fake `pmvid` and does not need projectM/ffmpeg.
 
 ## Notes for the implementer
 
