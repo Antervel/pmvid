@@ -1,0 +1,17 @@
+pmvid
+Copyright (c) 2026 pmvid contributors
+
+This product links against projectM (https://github.com/projectM-visualizer/projectm),
+which is licensed under the GNU Lesser General Public License, version 2.1 or
+later (LGPL-2.1-or-later). projectM source code is downloaded at build time from
+a pinned commit and is not included in this repository.
+
+The vendored crates in vendor/projectm and vendor/projectm-sys are patched
+copies of projectm 3.1.2 and projectm-sys 1.0.7. Both are distributed under
+LGPL-2.1-or-later. See vendor/projectm/LICENSE and vendor/projectm-sys/LICENSE.
+
+MilkDrop presets are not bundled with pmvid. Preset files have their own
+licenses and are the responsibility of the user.
+
+The tiny test preset in tests/fixtures/simple.milk is derived from projectM's
+test presets (LGPL-2.1-or-later) and is used only for testing.

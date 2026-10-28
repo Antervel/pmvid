@@ -153,7 +153,7 @@ xvfb-run -a cargo run --features projectm -- -i song.mp3 -o song.mp4
 
 - [x] [0023 — Error handling and exit codes](0023-errors.md)
 - [ ] [0024 — Determinism check](0024-determinism.md)
-- [ ] [0025 — README, install docs, licenses](0025-docs.md)
+- [x] [0025 — README, install docs, licenses](0025-docs.md) — differed from plan: docs/install.md skipped (KISS); README options block mirrors real --help output.
 - [ ] [0026 — Dockerfile and headless CI](0026-docker.md)
 - [ ] [0027 — Extra audio formats](0027-extra-formats.md)
 - [ ] [0028 — Batch mode (P2, optional)](0028-batch.md)
