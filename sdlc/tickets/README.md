@@ -147,7 +147,7 @@ xvfb-run -a cargo run --features projectm -- -i song.mp3 -o song.mp4
 - [x] [0019 — Renderer initialization and one frame](0019-renderer-init.md)
 - [x] [0020 — Feed PCM and set frame time](0020-audio-feed.md)
 - [x] [0021 — Render loop and MP4 output](0021-render-loop.md)
-- [ ] [0022 — Preset switching and failed-preset handling](0022-preset-switching.md)
+- [x] [0022 — Preset switching and failed-preset handling](0022-preset-switching.md) — differed from plan: added NUL-safe preset path passing and unwind-safe projectM failure callback.
 
 ### Hardening and acceptance
 

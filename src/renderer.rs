@@ -1,6 +1,7 @@
 //! projectM renderer: GL context + projectM instance + FBO readback.
 
 use std::path::Path;
+use std::sync::{Arc, Mutex};
 
 use anyhow::{ensure, Context, Result};
 use projectm::core::{ProjectM, STEREO};
@@ -19,6 +20,7 @@ pub struct Renderer {
     gl: GlContext,
     pm: ProjectM,
     fps: u32,
+    failed_presets: Arc<Mutex<Vec<String>>>,
 }
 
 impl Renderer {
@@ -42,10 +44,21 @@ impl Renderer {
         // own timer from requesting switches.
         pm.set_preset_locked(true);
 
+        let failed_presets = Arc::new(Mutex::new(Vec::new()));
+        let failed_for_callback = Arc::clone(&failed_presets);
+
+        pm.set_preset_switch_failed_event_callback(move |filename, message| {
+            eprintln!("warning: preset '{filename}' failed to load: {message}");
+            if let Ok(mut failures) = failed_for_callback.lock() {
+                failures.push(filename);
+            }
+        });
+
         let renderer = Self {
             gl,
             pm,
             fps: config.fps,
+            failed_presets,
         };
         renderer.load_preset(preset, false)?;
         Ok(renderer)
@@ -53,10 +66,19 @@ impl Renderer {
 
     /// Load a preset. `smooth` requests projectM's soft cut.
     pub fn load_preset(&self, preset: &Path, smooth: bool) -> Result<()> {
-        let preset = preset
+        ensure!(
+            preset.is_file(),
+            "preset file '{}' does not exist",
+            preset.display()
+        );
+        let preset_str = preset
             .to_str()
             .with_context(|| format!("preset path is not valid UTF-8: {}", preset.display()))?;
-        self.pm.load_preset_file(preset, smooth);
+        let preset_c =
+            std::ffi::CString::new(preset_str).context("preset path contains a NUL byte")?;
+        let preset_str =
+            std::str::from_utf8(preset_c.as_bytes()).context("preset path is not valid UTF-8")?;
+        self.pm.load_preset_file(preset_str, smooth);
         Ok(())
     }
 
@@ -91,6 +113,14 @@ impl Renderer {
     /// The fps projectM was configured with.
     pub fn fps(&self) -> u32 {
         self.fps
+    }
+
+    /// Presets that projectM reported as failed since startup.
+    pub fn failed_presets(&self) -> Vec<String> {
+        self.failed_presets
+            .lock()
+            .map(|failures| failures.clone())
+            .unwrap_or_default()
     }
 
     /// Feed the audio belonging to `frame` to projectM.

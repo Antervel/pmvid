@@ -148,11 +148,11 @@ impl Projectm {
             user_data: *mut std::os::raw::c_void,
         ) {
             let preset_filename_str = unsafe { std::ffi::CStr::from_ptr(preset_filename) };
-            let preset_filename_str_slice = preset_filename_str.to_str().unwrap();
+            let preset_filename_str_slice = preset_filename_str.to_str().unwrap_or("");
             let preset_filename = preset_filename_str_slice.to_owned();
 
             let message_str = unsafe { std::ffi::CStr::from_ptr(message) };
-            let message_str_slice = message_str.to_str().unwrap();
+            let message_str_slice = message_str.to_str().unwrap_or("");
             let message = message_str_slice.to_owned();
             unsafe { (*user_data.cast::<F>())(preset_filename, message) }
         }

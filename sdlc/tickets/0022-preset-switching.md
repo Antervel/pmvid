@@ -196,10 +196,10 @@ Expected: a warning about `broken.milk`, the render finishes, and the MP4 plays.
 
 ## Acceptance criteria
 
-- [ ] projectM's own preset timer cannot switch presets.
-- [ ] A failed preset logs a warning and does not abort the render.
-- [ ] Failed preset names are recorded in `failed_presets()`.
-- [ ] A missing preset file returns an error from `load_preset`.
+- [x] projectM's own preset timer cannot switch presets.
+- [x] A failed preset logs a warning and does not abort the render.
+- [x] Failed preset names are recorded in `failed_presets()`.
+- [x] A missing preset file returns an error from `load_preset`.
 - [ ] The ignored native test passes manually.
 
 ## Notes for the implementer
@@ -214,3 +214,13 @@ Expected: a warning about `broken.milk`, the render finishes, and the MP4 plays.
   test may need one extra render call. Add it if necessary, but do not add
   sleeps.
 - Keep the warning on stderr, not stdout. stdout is reserved for normal output.
+
+## Deviation from the plan
+
+- `Renderer::load_preset` now hands projectM a NUL-terminated C string
+  (`std::ffi::CString`) instead of a raw `&str`, because projectM's FFI takes a
+  C string and a `&str` borrowed from `Path::to_str()` is not guaranteed to be
+  NUL-terminated.
+- The vendored projectM callback trampolines no longer `unwrap()` the callback
+  strings; they fall back to an empty string. The trampolines are `extern "C"`
+  and cannot unwind, so a bad string would abort the whole render.
