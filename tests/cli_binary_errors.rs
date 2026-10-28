@@ -10,7 +10,7 @@ fn no_arguments_fails_with_usage() {
     Command::cargo_bin("pmvid")
         .unwrap()
         .assert()
-        .failure()
+        .code(2)
         .stderr(predicate::str::contains("Usage"));
 }
 
@@ -54,4 +54,5 @@ fn corrupt_audio_fails_before_rendering() {
         .stderr(predicate::str::contains(
             "unsupported or corrupt audio file",
         ));
+    assert!(!output.exists());
 }
