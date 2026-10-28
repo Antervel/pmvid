@@ -54,3 +54,16 @@ fn rejects_a_negative_frame_time() {
 
     assert!(renderer.render_frame(-0.1, &mut frame).is_err());
 }
+
+#[test]
+#[ignore = "requires EGL/GL, projectM, and the native projectm feature"]
+fn feeds_a_second_of_audio() {
+    let config = config();
+    let renderer = Renderer::new(&config, Path::new("tests/fixtures/simple.milk"))
+        .expect("renderer initialization failed");
+    let pcm = vec![0.0_f32; 44_100 * 2];
+
+    for frame in 0..30 {
+        renderer.feed_audio(frame, &pcm).unwrap();
+    }
+}

@@ -3,10 +3,13 @@
 use std::path::Path;
 
 use anyhow::{ensure, Context, Result};
-use projectm::core::ProjectM;
+use projectm::core::{ProjectM, STEREO};
 
+use crate::audio::pcm_chunks;
 use crate::config::RenderConfig;
 use crate::gl_ctx::GlContext;
+use crate::timebase::frame_sample_range;
+use crate::CHANNELS;
 
 /// Owns the GL context and projectM instance.
 ///
@@ -88,5 +91,35 @@ impl Renderer {
     /// The fps projectM was configured with.
     pub fn fps(&self) -> u32 {
         self.fps
+    }
+
+    /// Feed the audio belonging to `frame` to projectM.
+    ///
+    /// `pcm` must be interleaved stereo at 44.1 kHz, as produced by
+    /// `audio::prepare`.
+    pub fn feed_audio(&self, frame: u64, pcm: &[f32]) -> Result<()> {
+        ensure!(
+            pcm.len() % CHANNELS == 0,
+            "PCM buffer length {} is not divisible by {CHANNELS}",
+            pcm.len()
+        );
+
+        let range = frame_sample_range(frame, self.fps);
+        let start = range.start as usize * CHANNELS;
+        let end = range.end as usize * CHANNELS;
+
+        ensure!(
+            end <= pcm.len(),
+            "frame {frame} needs PCM samples {start}..{end}, but the buffer has {} samples",
+            pcm.len()
+        );
+
+        let window = &pcm[start..end];
+        let max_samples = ProjectM::pcm_get_max_samples() as usize;
+        for chunk in pcm_chunks(window, max_samples) {
+            self.pm.pcm_add_float(chunk, STEREO);
+        }
+
+        Ok(())
     }
 }

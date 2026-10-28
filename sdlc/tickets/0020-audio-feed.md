@@ -170,12 +170,12 @@ LIBGL_ALWAYS_SOFTWARE=1 cargo test --features projectm -- --ignored --nocapture
 
 ## Acceptance criteria
 
-- [ ] Every chunk passed to `pcm_add_float` fits projectM's buffer.
-- [ ] Chunking never drops or duplicates samples.
-- [ ] Chunks are at most 512 frames.
-- [ ] `feed_audio` rejects a PCM buffer with an odd length.
-- [ ] `feed_audio` rejects a frame whose window is past the end.
-- [ ] Frame ranges come from `timebase::frame_sample_range`, not a rounded
+- [x] Every chunk passed to `pcm_add_float` fits projectM's buffer.
+- [x] Chunking never drops or duplicates samples.
+- [x] Chunks are at most 512 frames.
+- [x] `feed_audio` rejects a PCM buffer with an odd length.
+- [x] `feed_audio` rejects a frame whose window is past the end.
+- [x] Frame ranges come from `timebase::frame_sample_range`, not a rounded
       samples-per-frame constant.
 
 ## Notes for the implementer

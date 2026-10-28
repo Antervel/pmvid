@@ -284,6 +284,20 @@ pub fn prepare(path: &Path) -> Result<PreparedAudio> {
     })
 }
 
+/// Split interleaved stereo samples into chunks that fit projectM's buffer.
+///
+/// `max_samples_per_channel` is `ProjectM::pcm_get_max_samples()`. The wrapper
+/// asserts on the *total* interleaved length, so the chunk frame count is
+/// `max_samples_per_channel / 2`, capped at 512 frames for responsiveness.
+pub fn pcm_chunks(samples: &[f32], max_samples_per_channel: usize) -> impl Iterator<Item = &[f32]> {
+    debug_assert!(
+        max_samples_per_channel >= crate::CHANNELS,
+        "projectM PCM buffer is too small for stereo"
+    );
+    let chunk_frames = (max_samples_per_channel / crate::CHANNELS).clamp(1, 512);
+    samples.chunks(chunk_frames * crate::CHANNELS)
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -379,5 +393,43 @@ mod tests {
     #[test]
     fn resample_rejects_partial_frame() {
         assert!(resample_linear(&[0.0, 0.0, 0.0], 44_100, 44_100, 2).is_err());
+    }
+
+    #[test]
+    fn pcm_chunks_fit_the_projectm_buffer() {
+        let samples = vec![0.0_f32; 3_000 * 2];
+        let chunks: Vec<_> = pcm_chunks(&samples, 2_048).collect();
+
+        assert_eq!(chunks.len(), 6); // 5 * 512 frames + 440 frames
+        assert!(chunks.iter().all(|chunk| chunk.len() <= 2_048));
+        assert_eq!(
+            chunks.iter().map(|chunk| chunk.len()).sum::<usize>(),
+            samples.len()
+        );
+    }
+
+    #[test]
+    fn pcm_chunks_use_smaller_buffers_when_needed() {
+        let samples = vec![0.0_f32; 1_000 * 2];
+        let chunks: Vec<_> = pcm_chunks(&samples, 512).collect();
+
+        assert!(chunks.iter().all(|chunk| chunk.len() <= 512));
+        assert_eq!(
+            chunks.iter().map(|chunk| chunk.len()).sum::<usize>(),
+            samples.len()
+        );
+    }
+
+    #[test]
+    fn pcm_chunks_cap_at_512_frames() {
+        let samples = vec![0.0_f32; 2_000 * 2];
+        let chunks: Vec<_> = pcm_chunks(&samples, 1_000_000).collect();
+        assert_eq!(chunks[0].len(), 512 * 2);
+    }
+
+    #[test]
+    fn pcm_chunks_handle_empty_input() {
+        let chunks: Vec<_> = pcm_chunks(&[], 2_048).collect();
+        assert!(chunks.is_empty());
     }
 }
