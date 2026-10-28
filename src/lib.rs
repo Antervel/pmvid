@@ -20,6 +20,9 @@ pub mod timebase;
 #[cfg(feature = "projectm")]
 pub mod gl_ctx;
 
+#[cfg(feature = "projectm")]
+pub mod renderer;
+
 #[cfg(test)]
 mod tests {
     #[test]

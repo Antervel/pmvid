@@ -144,7 +144,7 @@ xvfb-run -a cargo run --features projectm -- -i song.mp3 -o song.mp4
 - [x] [0017 — Headless EGL + FBO smoke test](0017-gl-smoke.md) — differed from plan: headless EGL run used Mesa llvmpipe and reported GL 4.5 core.
 - [x] [0018 — projectM build/API spike](0018-projectm-spike.md) — differed from plan: released projectm-sys 1.2.2 bundled projectM 4.1.3; vendored and pinned to commit 349b7cc (projectM 4.2.0) via 0018a.
 - [x] [0018a — Pin and vendor the projectM native build](0018a-projectm-pin.md) — done during 0018: vendored projectm 3.1.2 and projectm-sys 1.2.2, patched the c_char casts, pinned projectM commit 349b7cc (4.2.0).
-- [ ] [0019 — Renderer initialization and one frame](0019-renderer-init.md)
+- [x] [0019 — Renderer initialization and one frame](0019-renderer-init.md)
 - [ ] [0020 — Feed PCM and set frame time](0020-audio-feed.md)
 - [ ] [0021 — Render loop and MP4 output](0021-render-loop.md)
 - [ ] [0022 — Preset switching and failed-preset handling](0022-preset-switching.md)

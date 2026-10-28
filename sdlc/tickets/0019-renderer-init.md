@@ -215,13 +215,13 @@ If EGL surfaceless fails, prefix the last command with `xvfb-run -a`.
 
 ## Acceptance criteria
 
-- [ ] `Renderer::new` creates the GL context before projectM.
-- [ ] A NULL projectM handle returns an error, not a panic.
-- [ ] `set_window_size`, `set_fps`, and `set_beat_sensitivity` are applied.
-- [ ] `set_preset_locked(true)` prevents projectM from switching on its own.
-- [ ] `render_frame` sets a fixed frame time and renders into the FBO.
-- [ ] The ignored smoke test reads back at least one non-black pixel.
-- [ ] Negative or non-finite frame times are rejected.
+- [x] `Renderer::new` creates the GL context before projectM.
+- [x] A NULL projectM handle returns an error, not a panic.
+- [x] `set_window_size`, `set_fps`, and `set_beat_sensitivity` are applied.
+- [x] `set_preset_locked(true)` prevents projectM from switching on its own.
+- [x] `render_frame` sets a fixed frame time and renders into the FBO.
+- [x] The ignored smoke test reads back at least one non-black pixel.
+- [x] Negative or non-finite frame times are rejected.
 
 ## Notes for the implementer
 
