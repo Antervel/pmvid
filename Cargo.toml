@@ -37,7 +37,7 @@ projectm = [
 [dependencies]
 anyhow = "1"
 clap = { version = "4", features = ["derive"] }
-symphonia = { version = "0.5.5", features = ["mp3"] }
+symphonia = { version = "0.5.5", features = ["mp3", "aac", "isomp4"] }
 rand = "0.8"
 indicatif = "0.17"
 

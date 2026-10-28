@@ -57,7 +57,7 @@ pub fn decode_file(path: &Path) -> Result<DecodedAudio> {
         )
         .with_context(|| {
             format!(
-                "unsupported or corrupt audio file '{}' (expected MP3, WAV, FLAC, or OGG)",
+                "unsupported or corrupt audio file '{}' (expected MP3, WAV, FLAC, OGG/Vorbis, or AAC/M4A)",
                 path.display()
             )
         })?;

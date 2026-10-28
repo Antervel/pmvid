@@ -155,11 +155,11 @@ cargo test --all-targets -- --nocapture extra_formats
 
 ## Acceptance criteria
 
-- [ ] `symphonia` enables `mp3`, `aac`, and `isomp4`.
-- [ ] FLAC, OGG/Vorbis, WAV, and AAC/M4A each decode to stereo 44.1 kHz.
-- [ ] MP3 still passes its existing test.
-- [ ] The README lists exactly the supported formats.
-- [ ] No new decoder dependency was added.
+- [x] `symphonia` enables `mp3`, `aac`, and `isomp4`.
+- [x] FLAC, OGG/Vorbis, WAV, and AAC/M4A each decode to stereo 44.1 kHz.
+- [x] MP3 still passes its existing test.
+- [x] The README lists exactly the supported formats.
+- [x] No new decoder dependency was added.
 
 ## Notes for the implementer
 

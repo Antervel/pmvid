@@ -63,6 +63,8 @@ cargo test --features projectm
 pmvid -i song.mp3 -o song.mp4 --presets ./presets
 ```
 
+Supported input formats: MP3, WAV, FLAC, OGG/Vorbis, AAC/M4A.
+
 All options:
 
 ```text
@@ -130,7 +132,7 @@ pmvid -i song.mp3 -o song.mp4 --seed 42
 | EGL works but rendering fails on a server | Install `libgl1-mesa-dri` for Mesa's software rasterizer. |
 | EGL display/context fails | Try `LIBGL_ALWAYS_SOFTWARE=1` or `xvfb-run -a`. |
 | `libprojectM-4.so: cannot open shared object file` | See "Runtime library path" below. |
-| `unsupported or corrupt audio file` | Check the file with `ffprobe`; MP3/WAV/FLAC/OGG are supported. |
+| `unsupported or corrupt audio file` | Check the file with `ffprobe`; supported formats are MP3, WAV, FLAC, OGG/Vorbis, and AAC/M4A. |
 | Build fails in projectM CMake | Install CMake and a full C++ toolchain; check the first build has network access. |
 
 ### Runtime library path
