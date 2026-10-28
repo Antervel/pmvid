@@ -74,10 +74,11 @@ impl Renderer {
         let preset_str = preset
             .to_str()
             .with_context(|| format!("preset path is not valid UTF-8: {}", preset.display()))?;
-        let preset_c =
-            std::ffi::CString::new(preset_str).context("preset path contains a NUL byte")?;
-        let preset_str =
-            std::str::from_utf8(preset_c.as_bytes()).context("preset path is not valid UTF-8")?;
+        ensure!(
+            !preset_str.contains('\0'),
+            "preset path contains a NUL byte: {}",
+            preset.display()
+        );
         self.pm.load_preset_file(preset_str, smooth);
         Ok(())
     }
