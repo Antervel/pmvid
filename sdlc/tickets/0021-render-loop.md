@@ -241,13 +241,13 @@ ffprobe -v error -show_entries stream=codec_name,width,height -of default=nw=1 /
 
 ## Acceptance criteria
 
-- [ ] `cargo run --features projectm -- ...` produces an MP4.
-- [ ] The MP4 has an H.264 video stream and an AAC audio stream.
-- [ ] The output duration is approximately the input duration.
-- [ ] Audio and video stay in sync on a short clip.
-- [ ] The seed is printed so the render can be reproduced.
-- [ ] A zero-frame audio file returns a clear error.
-- [ ] The ignored e2e test passes manually.
+- [x] `cargo run --features projectm -- ...` produces an MP4.
+- [x] The MP4 has an H.264 video stream and an AAC audio stream.
+- [x] The output duration is approximately the input duration.
+- [x] Audio and video stay in sync on a short clip.
+- [x] The seed is printed so the render can be reproduced.
+- [x] A zero-frame audio file returns a clear error.
+- [x] The ignored e2e test passes manually.
 
 ## Notes for the implementer
 

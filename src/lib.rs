@@ -23,6 +23,9 @@ pub mod gl_ctx;
 #[cfg(feature = "projectm")]
 pub mod renderer;
 
+#[cfg(feature = "projectm")]
+pub mod app;
+
 #[cfg(test)]
 mod tests {
     #[test]

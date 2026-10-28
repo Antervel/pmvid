@@ -146,7 +146,7 @@ xvfb-run -a cargo run --features projectm -- -i song.mp3 -o song.mp4
 - [x] [0018a — Pin and vendor the projectM native build](0018a-projectm-pin.md) — done during 0018: vendored projectm 3.1.2 and projectm-sys 1.2.2, patched the c_char casts, pinned projectM commit 349b7cc (4.2.0).
 - [x] [0019 — Renderer initialization and one frame](0019-renderer-init.md)
 - [x] [0020 — Feed PCM and set frame time](0020-audio-feed.md)
-- [ ] [0021 — Render loop and MP4 output](0021-render-loop.md)
+- [x] [0021 — Render loop and MP4 output](0021-render-loop.md)
 - [ ] [0022 — Preset switching and failed-preset handling](0022-preset-switching.md)
 
 ### Hardening and acceptance

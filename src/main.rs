@@ -1,4 +1,6 @@
 fn main() {
-    eprintln!("pmvid: renderer not implemented yet (see tickets 0017-0021)");
-    std::process::exit(1);
+    if let Err(err) = pmvid::app::run() {
+        eprintln!("error: {err:#}");
+        std::process::exit(1);
+    }
 }
