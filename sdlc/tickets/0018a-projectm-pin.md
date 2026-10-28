@@ -448,21 +448,21 @@ If surfaceless EGL fails, prefix the last command with `xvfb-run -a`.
 
 ## Acceptance criteria
 
-- [ ] `Cargo.toml` contains `[patch.crates-io]` entries for `projectm` and
+- [x] `Cargo.toml` contains `[patch.crates-io]` entries for `projectm` and
       `projectm-sys`.
-- [ ] `cargo tree -i projectm --features projectm` shows the `vendor/` path,
+- [x] `cargo tree -i projectm --features projectm` shows the `vendor/` path,
       not a crates.io registry copy.
-- [ ] `cargo tree -i projectm-sys --features projectm` shows the `vendor/`
+- [x] `cargo tree -i projectm-sys --features projectm` shows the `vendor/`
       path, not a crates.io registry copy.
-- [ ] The vendored build uses commit
+- [x] The vendored build uses commit
       `349b7cc2db312d47cef6be24c6856ced6643a385`, not `master` or a tag.
-- [ ] `PMVID_PROJECTM_SOURCE_DIR` builds without cloning.
-- [ ] Both 4.2 functions are present in the generated bindings.
-- [ ] `vendor/projectm/src/core.rs` uses `std::os::raw::c_char`, and the crate
+- [x] `PMVID_PROJECTM_SOURCE_DIR` builds without cloning.
+- [x] Both 4.2 functions are present in the generated bindings.
+- [x] `vendor/projectm/src/core.rs` uses `std::os::raw::c_char`, and the crate
       compiles on aarch64.
-- [ ] `examples/pm_info.rs` builds and prints `projectM spike OK`.
-- [ ] `vendor/projectm/LICENSE` and `vendor/projectm-sys/LICENSE` are present.
-- [ ] No projectM source checkout is committed to this repository.
+- [x] `examples/pm_info.rs` builds and prints `ProjectM spike OK`.
+- [x] `vendor/projectm/LICENSE` and `vendor/projectm-sys/LICENSE` are present.
+- [x] No projectM source checkout is committed to this repository.
 
 ## Notes for the implementer
 

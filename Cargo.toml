@@ -20,6 +20,11 @@ name = "gl_smoke"
 path = "examples/gl_smoke.rs"
 required-features = ["projectm"]
 
+[[example]]
+name = "pm_info"
+path = "examples/pm_info.rs"
+required-features = ["projectm"]
+
 [features]
 default = []
 projectm = [
@@ -48,3 +53,7 @@ assert_cmd = "2"
 predicates = "3"
 tempfile = "3"
 hound = "3.5"
+
+[patch.crates-io]
+projectm = { path = "vendor/projectm" }
+projectm-sys = { path = "vendor/projectm-sys" }

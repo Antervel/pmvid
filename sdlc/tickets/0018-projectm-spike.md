@@ -253,14 +253,14 @@ xvfb-run -a cargo run --features projectm --example pm_info -- \
 
 ## Acceptance criteria
 
-- [ ] `cargo build --features projectm --example pm_info` succeeds.
-- [ ] The example prints a projectM 4.x version.
-- [ ] `projectm_set_frame_time` compiles and is called.
-- [ ] `projectm_opengl_render_frame_fbo` compiles and is called.
-- [ ] At least one non-black pixel is read back from the test preset.
-- [ ] Runtime linking is resolved or the `LD_LIBRARY_PATH` workaround is
+- [x] `cargo build --features projectm --example pm_info` succeeds.
+- [x] The example prints a projectM 4.x version.
+- [x] `projectm_set_frame_time` compiles and is called.
+- [x] `projectm_opengl_render_frame_fbo` compiles and is called.
+- [x] At least one non-black pixel is read back from the test preset.
+- [x] Runtime linking is resolved or the `LD_LIBRARY_PATH` workaround is
       documented.
-- [ ] `docs/spike-projectm.md` records the versions and findings.
+- [x] `docs/spike-projectm.md` records the versions and findings.
 
 ## Stop conditions
 

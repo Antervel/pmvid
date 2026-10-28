@@ -1,0 +1,13 @@
+[preset00]
+// Minimal test preset derived from projectM's test presets.
+// See tests/fixtures/README.md for attribution.
+fdecay=0
+warp=0
+nWaveMode=6
+fWaveScale=1
+fwavesmoothing=0.01
+wave_r=1.0
+wave_g=1.0
+wave_b=1.0
+wave_x=0.500000
+wave_y=0.500000
