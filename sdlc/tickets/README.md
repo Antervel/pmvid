@@ -151,7 +151,7 @@ xvfb-run -a cargo run --features projectm -- -i song.mp3 -o song.mp4
 
 ### Hardening and acceptance
 
-- [ ] [0023 — Error handling and exit codes](0023-errors.md)
+- [x] [0023 — Error handling and exit codes](0023-errors.md)
 - [ ] [0024 — Determinism check](0024-determinism.md)
 - [ ] [0025 — README, install docs, licenses](0025-docs.md)
 - [ ] [0026 — Dockerfile and headless CI](0026-docker.md)

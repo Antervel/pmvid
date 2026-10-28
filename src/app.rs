@@ -36,7 +36,7 @@ pub fn run_with_config(config: RenderConfig) -> Result<()> {
         config.fps
     );
 
-    let preset_files = presets::scan(&config.presets)?;
+    let preset_files = presets::scan(&config.presets).context("loading presets")?;
     let preset_files = presets::shuffle(preset_files, config.seed);
     let mut schedule = PresetSchedule::new(preset_files, config.preset_duration, config.fps)?;
 

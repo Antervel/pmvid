@@ -231,12 +231,12 @@ cargo test --all-targets --features projectm
 
 ## Acceptance criteria
 
-- [ ] `main` prints `error: <full context chain>` and exits 1.
-- [ ] Missing input, corrupt audio, empty presets, and missing ffmpeg have
+- [x] `main` prints `error: <full context chain>` and exits 1.
+- [x] Missing input, corrupt audio, empty presets, and missing ffmpeg have
       tests asserting on the message.
-- [ ] Binary-level tests assert a non-zero exit code.
-- [ ] No failure path panics with `unwrap()` on user input.
-- [ ] The manual no-EGL and missing-ffmpeg checks are documented.
+- [x] Binary-level tests assert a non-zero exit code.
+- [x] No failure path panics with `unwrap()` on user input.
+- [x] The manual no-EGL and missing-ffmpeg checks are documented.
 
 ## Notes for the implementer
 
