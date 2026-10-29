@@ -143,8 +143,9 @@ Files that share a stem but differ in extension (for example `song.mp3` and
 
 ## Presets
 
-Presets are not bundled. Download a MilkDrop preset pack and point
-`--presets` at the directory. `pmvid` scans recursively for `.milk` files.
+Presets are not bundled. Download a MilkDrop preset pack like [Milkdrop "Cream 
+of the Crop" Presets](https://github.com/projectM-visualizer/presets-cream-of-the-crop) 
+and point `--presets` at the directory. `pmvid` scans recursively for `.milk` files.
 
 A tiny test preset lives in `tests/fixtures/simple.milk`; it is not a
 substitute for a real preset pack.
