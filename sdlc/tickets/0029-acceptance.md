@@ -282,13 +282,13 @@ bash -n scripts/check_resolutions.sh
 
 ## Acceptance criteria
 
-- [ ] The 10-minute click track renders and its duration drift is under one
+- [x] The 10-minute click track renders and its duration drift is under one
       frame.
-- [ ] Clicks and visual flashes stay aligned at the start, middle, and end.
-- [ ] 1280×720, 1920×1080, and 854×480 outputs have the requested dimensions.
-- [ ] A 4-minute MP3 produces a playable H.264/AAC MP4 with reactive visuals.
-- [ ] The render works under `LIBGL_ALWAYS_SOFTWARE=1` or `xvfb-run`.
-- [ ] The ignored acceptance test passes manually.
+- [x] Clicks and visual flashes stay aligned at the start, middle, and end.
+- [x] 1280×720, 1920×1080, and 854×480 outputs have the requested dimensions.
+- [x] A 4-minute MP3 produces a playable H.264/AAC MP4 with reactive visuals.
+- [x] The render works under `LIBGL_ALWAYS_SOFTWARE=1` or `xvfb-run`.
+- [x] The ignored acceptance test passes manually.
 
 ## Notes for the implementer
 
