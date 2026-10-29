@@ -19,7 +19,7 @@ for size in 1280x720 1920x1080 854x480; do
         -o "$output" \
         -W "$width" \
         -H "$height" \
-        -f 30 \
+        -f "${FPS:-30}" \
         --presets "$presets" \
         --seed 42
 

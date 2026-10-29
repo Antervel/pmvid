@@ -27,7 +27,7 @@ BEGIN {
     if (drift < 0) drift = -drift;
     limit = 1.0 / fps;
     printf "drift: %.6fs (limit: %.6fs)\n", drift, limit;
-    if (drift > limit) {
+    if (drift >= limit) {
         print "FAIL: drift exceeds one frame";
         exit 1;
     }
