@@ -28,9 +28,14 @@ fi
 pmvid_bin="${PMVID_BIN:-pmvid}"
 
 for file in "${files[@]}"; do
+    [[ -f "$file" ]] || continue
     base="$(basename "$file")"
     base="${base%.*}"
     output="$output_dir/$base.mp4"
+    if [[ -e "$output" ]]; then
+        echo "error: output '$output' already exists; skipping '$file'" >&2
+        continue
+    fi
     echo "rendering '$file' -> '$output'"
     "$pmvid_bin" -i "$file" -o "$output" "$@"
 done

@@ -36,10 +36,21 @@ fn renders_each_supported_file() {
     assert!(status.success());
 
     let calls = fs::read_to_string(&log).unwrap();
-    assert_eq!(calls.matches("-i").count(), 2);
-    assert!(calls.contains("a.mp3"));
-    assert!(calls.contains("b.wav"));
-    assert!(!calls.contains("notes.txt"));
+    let args: Vec<&str> = calls
+        .lines()
+        .map(|l| l.trim())
+        .filter(|l| !l.is_empty())
+        .collect();
+    // Two renders, each: -i <input> -o <output>.
+    assert_eq!(args.len(), 8);
+    assert_eq!(args[0], "-i");
+    assert_eq!(args[2], "-o");
+    assert_eq!(args[4], "-i");
+    assert_eq!(args[6], "-o");
+    assert!(args[1].ends_with("a.mp3"));
+    assert!(args[3].ends_with("a.mp4"));
+    assert!(args[5].ends_with("b.wav"));
+    assert!(args[7].ends_with("b.mp4"));
 }
 
 #[test]
