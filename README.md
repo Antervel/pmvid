@@ -57,6 +57,39 @@ Run the native checks:
 cargo test --features projectm
 ```
 
+## Install
+
+Build and install into `~/.local`:
+
+```sh
+PREFIX="$HOME/.local" ./scripts/install.sh
+export PATH="$HOME/.local/bin:$PATH"
+pmvid --version
+```
+
+The script copies the pinned projectM shared libraries next to the binary and sets an rpath, so no `LD_LIBRARY_PATH` is needed after installation.
+
+For development, run through the wrapper:
+
+```sh
+./scripts/with-projectm-libs.sh cargo run --features projectm -- \
+  -i song.mp3 -o song.mp4 --presets ./presets
+```
+
+## Reproducible native build
+
+The native dependency is pinned. `vendor/projectm-sys` builds projectM from
+commit `349b7cc2db312d47cef6be24c6856ced6643a385` and uses the 4.2 frame-time
+and FBO APIs. `vendor/projectm` is the patched Rust wrapper. The projectM source
+is downloaded at build time; it is not committed here.
+
+To build offline, point the build at an existing checkout:
+
+```sh
+PMVID_PROJECTM_SOURCE_DIR=/path/to/projectm \
+  cargo build --release --locked --features projectm
+```
+
 ## Usage
 
 ```sh
@@ -149,21 +182,22 @@ pmvid -i song.mp3 -o song.mp4 --seed 42
 | `loading libEGL.so.1` fails | Install `libegl1-mesa-dev` (build) and `libegl1` (runtime). |
 | EGL works but rendering fails on a server | Install `libgl1-mesa-dri` for Mesa's software rasterizer. |
 | EGL display/context fails | Try `LIBGL_ALWAYS_SOFTWARE=1` or `xvfb-run -a`. |
-| `libprojectM-4.so: cannot open shared object file` | See "Runtime library path" below. |
+| `libprojectM-4.so: cannot open shared object file` | Use `./scripts/install.sh`, or for a raw `cargo run` use `./scripts/with-projectm-libs.sh`. |
 | `unsupported or corrupt audio file` | Check the file with `ffprobe`; supported formats are MP3, WAV, FLAC, OGG/Vorbis, and AAC/M4A. |
 | Build fails in projectM CMake | Install CMake and a full C++ toolchain; check the first build has network access. |
 
 ### Runtime library path
 
 The pinned `projectm-sys` links shared `libprojectM-4` libraries from its build
-directory but does not install an rpath. For local runs:
+directory but does not install an rpath.
+
+The installed binary gets an rpath and does not need `LD_LIBRARY_PATH`. For a
+raw local run, use the development wrapper:
 
 ```sh
-export LD_LIBRARY_PATH="$(find target -name 'libprojectM-4.so*' -printf '%h\n' | head -n1):${LD_LIBRARY_PATH:-}"
+./scripts/with-projectm-libs.sh cargo run --features projectm -- \
+  -i song.mp3 -o song.mp4 --presets ./presets
 ```
-
-The Docker image in `0026` copies the libraries into the runtime image. A
-proper install script and rpath are added in ticket `0030`.
 
 ## Licensing
 

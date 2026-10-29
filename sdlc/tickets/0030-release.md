@@ -295,19 +295,19 @@ docker run --rm pmvid --version
 
 ## Acceptance criteria
 
-- [ ] `scripts/with-projectm-libs.sh` runs a development binary with the
+- [x] `scripts/with-projectm-libs.sh` runs a development binary with the
       projectM libraries on `LD_LIBRARY_PATH`.
-- [ ] `scripts/install.sh` installs the binary and both projectM libraries.
-- [ ] The installed binary runs without `LD_LIBRARY_PATH`.
-- [ ] `readelf` shows an `$ORIGIN`-relative rpath.
-- [ ] A short render works with the installed binary.
-- [ ] The README documents install, development, pinned build, and
+- [x] `scripts/install.sh` installs the binary and both projectM libraries.
+- [x] The installed binary runs without `LD_LIBRARY_PATH`.
+- [x] `readelf` shows an `$ORIGIN`-relative rpath.
+- [x] A short render works with the installed binary.
+- [x] The README documents install, development, pinned build, and
       troubleshooting.
-- [ ] `NOTICE` names LGPL-2.1-or-later and both vendored crates
+- [x] `NOTICE` names LGPL-2.1-or-later and both vendored crates
       (`projectm` and `projectm-sys`).
-- [ ] The native CI job is required and does not use `continue-on-error`.
-- [ ] `docs/release-checklist.md` exists and every item is checked.
-- [ ] All default and native test commands pass.
+- [x] The native CI job is required and does not use `continue-on-error`.
+- [x] `docs/release-checklist.md` exists and every item is checked.
+- [x] All default and native test commands pass.
 
 ## Notes for the implementer
 

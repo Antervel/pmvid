@@ -158,7 +158,7 @@ xvfb-run -a cargo run --features projectm -- -i song.mp3 -o song.mp4
 - [x] [0027 — Extra audio formats](0027-extra-formats.md) — differed from plan: decode error message now lists AAC/M4A.
 - [x] [0028 — Batch mode (P2, optional)](0028-batch.md) — done as specified; tests use fake pmvid and bash.
 - [x] [0029 — Sync/acceptance test](0029-acceptance.md) — done as specified; acceptance renders used PMVID_BIN/P RESETS overrides (no ./presets dir is bundled, pmvid not on PATH).
-- [ ] [0030 — Release polish](0030-release.md)
+- [x] [0030 — Release polish](0030-release.md) — done as specified; install/E2E/docker checks run; release build needed /tmp cleanup (disk full).
 
 ---
 
