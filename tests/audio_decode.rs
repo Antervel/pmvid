@@ -78,6 +78,10 @@ fn rejects_a_missing_file() {
 
 #[test]
 fn skips_corrupt_packets_instead_of_failing() {
+    if Command::new("ffmpeg").arg("-version").output().is_err() {
+        eprintln!("skipping corrupt-packet test: ffmpeg not found");
+        return;
+    }
     let dir = tempfile::tempdir().unwrap();
     let path = dir.path().join("tone.mp3");
     let status = Command::new("ffmpeg")
