@@ -112,6 +112,7 @@ xvfb-run -a cargo run --features projectm -- -i song.mp3 -o song.mp4
 | M3 — hardening, determinism, docs | 0023–0025 |
 | M4 — headless/Docker, extra formats, batch | 0026–0028 |
 | Acceptance | 0029–0030 |
+| Distribution — CI-built container image | 0031 |
 
 ---
 
@@ -160,6 +161,10 @@ xvfb-run -a cargo run --features projectm -- -i song.mp3 -o song.mp4
 - [x] [0029 — Sync/acceptance test](0029-acceptance.md) — done as specified; acceptance renders used PMVID_BIN/P RESETS overrides (no ./presets dir is bundled, pmvid not on PATH).
 - [x] [0030 — Release polish](0030-release.md) — done as specified; install/E2E/docker checks run; release build needed /tmp cleanup (disk full).
 
+### Distribution
+
+- [x] [0031 — Build and publish the Docker image in CI](0031-gha-docker-image.md) — done as specified; docker job added with fast/native gate and GHCR publish for default branch and v* tags.
+
 ---
 
 ## Dependency graph
@@ -181,6 +186,8 @@ xvfb-run -a cargo run --features projectm -- -i song.mp3 -o song.mp4
 0021 → 0029
 0007 → 0027
 all  → 0030
+0026 → 0031
+0030 → 0031
 ```
 
 ---

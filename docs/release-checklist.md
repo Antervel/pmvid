@@ -18,6 +18,9 @@
 - [x] `docker build -t pmvid .` succeeds.
 - [x] The native CI job is green.
 - [x] Ticket `0029` acceptance checks were reviewed.
+- [ ] The CI `docker` job is green and published the release tag.
+- [ ] `docker pull ghcr.io/antervel/pmvid:<version>` succeeds.
+- [ ] The pulled image runs `--version` and renders a short MP4 headlessly.
 
 ### Final checks
 
@@ -69,4 +72,23 @@ Docker check:
 ```sh
 docker build -t pmvid .
 docker run --rm pmvid --version
+```
+
+GHCR check:
+
+```sh
+docker pull ghcr.io/antervel/pmvid:latest
+docker run --rm ghcr.io/antervel/pmvid:latest --version
+```
+
+GHCR headless render check:
+
+```sh
+tmp="$(mktemp -d)"
+mkdir -p "$tmp/presets"
+cp tests/fixtures/simple.milk "$tmp/presets/"
+ffmpeg -y -f lavfi -i "sine=frequency=440:duration=2" "$tmp/tone.mp3"
+docker run --rm -v "$tmp:/work" ghcr.io/antervel/pmvid:latest \
+  -i /work/tone.mp3 -o /work/tone.mp4 --presets /work/presets --seed 42
+ffprobe -v error -show_entries stream=codec_name -of csv=p=0 "$tmp/tone.mp4"
 ```

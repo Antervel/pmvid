@@ -76,6 +76,24 @@ For development, run through the wrapper:
   -i song.mp3 -o song.mp4 --presets ./presets
 ```
 
+## Docker image
+
+CI publishes the image to GHCR when the default branch or a `v*` tag is pushed.
+Pull requests build and smoke-test the image but do not publish it.
+
+```sh
+docker pull ghcr.io/antervel/pmvid:latest
+docker run --rm -v "$PWD:/work" ghcr.io/antervel/pmvid:latest \
+  -i song.mp3 -o song.mp4 --presets /work/presets
+```
+
+The preset directory must be mounted too; presets are not bundled. The image
+runs headless with Mesa software rendering (`LIBGL_ALWAYS_SOFTWARE=1`).
+
+The GHCR package is private by default. Either set its visibility to public in
+the package settings or run `docker login ghcr.io` with a token that can read
+packages before pulling.
+
 ## Reproducible native build
 
 The native dependency is pinned. `vendor/projectm-sys` builds projectM from
