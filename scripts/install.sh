@@ -1,8 +1,13 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-cd "$(dirname "$0")/.."
 prefix="${PREFIX:-$HOME/.local}"
+case "$prefix" in
+    /*) ;;
+    *) prefix="$(pwd)/$prefix" ;;
+esac
+
+cd "$(dirname "$0")/.."
 bin_dir="$prefix/bin"
 lib_dir="$prefix/lib/pmvid"
 rpath='$ORIGIN/../lib/pmvid'
@@ -13,6 +18,8 @@ if [[ "$prefix" == *" "* ]]; then
 fi
 
 mkdir -p "$bin_dir" "$lib_dir"
+rm -rf "$lib_dir"
+mkdir -p "$lib_dir"
 
 echo "==> building pmvid"
 RUSTFLAGS="${RUSTFLAGS:-} -C link-arg=-Wl,-rpath,$rpath" \
