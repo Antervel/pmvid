@@ -116,7 +116,7 @@ jobs:
       - uses: actions/checkout@v4
 
       # GHCR requires a lowercase image name. github.repository keeps the
-      # owner's display case, so "Antervel/pmvid" becomes "ghcr.io/antervel/pmvid".
+      # owner's display case, so "Antervel/pmvid" becomes "ghcr.io/antervel/pmvid-arm64".
       - name: Compute image name
         run: echo "IMAGE_NAME=ghcr.io/${GITHUB_REPOSITORY,,}-arm64" >> "$GITHUB_ENV"
 
