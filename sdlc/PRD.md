@@ -64,7 +64,7 @@ projectM's official frontends are built for realtime playback. There is no polis
 - **Portability:** Linux x86_64 first. Document required system packages.
 - **Robustness:** Clear error messages for missing ffmpeg, no GL context, unreadable audio, or an empty preset directory.
 - **Licensing:** The tool is MIT/Apache-compatible. Note that projectM is LGPL and presets have their own licenses.
-- **Container image:** The GitHub Actions workflow builds the `Dockerfile` after the fast and native jobs pass, and publishes `ghcr.io/<lowercase-owner>/pmvid` (`linux/amd64`) for pushes to the default branch and `v*` tags.
+- **Container image:** The GitHub Actions workflow builds the `Dockerfile` after the fast and native jobs pass, and publishes `ghcr.io/<lowercase-owner>/pmvid` for pushes to the default branch and `v*` tags, for both the `linux/amd64` and the `linux/arm64` (variant `v8`) image.
 
 ## 7. CLI Specification
 

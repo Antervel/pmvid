@@ -21,6 +21,8 @@
 - [ ] The CI `docker` job is green and published the release tag.
 - [ ] `docker pull ghcr.io/antervel/pmvid:<version>` succeeds.
 - [ ] The pulled image runs `--version` and renders a short MP4 headlessly.
+- [ ] The CI `docker-arm64` job is green and published the release tag.
+- [ ] The pulled `linux/arm64` image runs `--version` and renders a short MP4 headlessly.
 
 ### Final checks
 
@@ -74,11 +76,26 @@ docker build -t pmvid .
 docker run --rm pmvid --version
 ```
 
+Arm64 docker check:
+
+```sh
+docker build --platform linux/arm64 -t pmvid:arm64 .
+docker run --rm pmvid:arm64 --version
+docker run --rm pmvid:arm64 --help >/dev/null
+```
+
 GHCR check:
 
 ```sh
 docker pull ghcr.io/antervel/pmvid:latest
 docker run --rm ghcr.io/antervel/pmvid:latest --version
+```
+
+GHCR arm64 check:
+
+```sh
+docker pull ghcr.io/antervel/pmvid:latest
+docker run --rm --platform linux/arm64 ghcr.io/antervel/pmvid:latest --version
 ```
 
 GHCR headless render check:
@@ -89,6 +106,18 @@ mkdir -p "$tmp/presets"
 cp tests/fixtures/simple.milk "$tmp/presets/"
 ffmpeg -y -f lavfi -i "sine=frequency=440:duration=2" "$tmp/tone.mp3"
 docker run --rm -v "$tmp:/work" ghcr.io/antervel/pmvid:latest \
+  -i /work/tone.mp3 -o /work/tone.mp4 --presets /work/presets --seed 42
+ffprobe -v error -show_entries stream=codec_name -of csv=p=0 "$tmp/tone.mp4"
+```
+
+GHCR headless render check (arm64):
+
+```sh
+tmp="$(mktemp -d)"
+mkdir -p "$tmp/presets"
+cp tests/fixtures/simple.milk "$tmp/presets/"
+ffmpeg -y -f lavfi -i "sine=frequency=440:duration=2" "$tmp/tone.mp3"
+docker run --rm -v "$tmp:/work" pmvid:arm64 \
   -i /work/tone.mp3 -o /work/tone.mp4 --presets /work/presets --seed 42
 ffprobe -v error -show_entries stream=codec_name -of csv=p=0 "$tmp/tone.mp4"
 ```

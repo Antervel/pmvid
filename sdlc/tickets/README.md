@@ -112,7 +112,7 @@ xvfb-run -a cargo run --features projectm -- -i song.mp3 -o song.mp4
 | M3 — hardening, determinism, docs | 0023–0025 |
 | M4 — headless/Docker, extra formats, batch | 0026–0028 |
 | Acceptance | 0029–0030 |
-| Distribution — CI-built container image | 0031 |
+| Distribution — CI-built container image | 0031, 0032 |
 
 ---
 
@@ -164,6 +164,7 @@ xvfb-run -a cargo run --features projectm -- -i song.mp3 -o song.mp4
 ### Distribution
 
 - [x] [0031 — Build and publish the Docker image in CI](0031-gha-docker-image.md) — done as specified; docker job added with fast/native gate and GHCR publish for default branch and v* tags.
+- [x] [0032 — Build and publish the linux/arm64 Docker image in CI](0032-docker-arm64-image.md) — done as specified; docker-arm64 job added with linux/arm64 platform and ubuntu-24.04-arm runner, same fast/native gate and GHCR publish for default branch and v* tags.
 
 ---
 
@@ -188,6 +189,7 @@ xvfb-run -a cargo run --features projectm -- -i song.mp3 -o song.mp4
 all  → 0030
 0026 → 0031
 0030 → 0031
+0031 → 0032
 ```
 
 ---

@@ -94,6 +94,18 @@ The GHCR package is private by default. Either set its visibility to public in
 the package settings or run `docker login ghcr.io` with a token that can read
 packages before pulling.
 
+CI also builds and publishes a `linux/arm64` image (variant `v8`) that mirrors
+the `linux/amd64` image. Pull and run it for the arm64 platform:
+
+```sh
+docker pull ghcr.io/antervel/pmvid:latest
+docker run --rm --platform linux/arm64 -v "$PWD:/work" ghcr.io/antervel/pmvid:latest \
+  -i song.mp3 -o song.mp4 --presets /work/presets
+```
+
+On arm64 hosts the `--platform linux/arm64` flag is a no-op; on amd64 hosts it
+selects the arm64 image instead of the default amd64 one.
+
 ## Reproducible native build
 
 The native dependency is pinned. `vendor/projectm-sys` builds projectM from
