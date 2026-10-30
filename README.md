@@ -98,8 +98,8 @@ CI also builds and publishes a `linux/arm64` image (variant `v8`) that mirrors
 the `linux/amd64` image. Pull and run it for the arm64 platform:
 
 ```sh
-docker pull ghcr.io/antervel/pmvid:latest
-docker run --rm --platform linux/arm64 -v "$PWD:/work" ghcr.io/antervel/pmvid:latest \
+docker pull ghcr.io/antervel/pmvid-arm64:latest
+docker run --rm --platform linux/arm64 -v "$PWD:/work" ghcr.io/antervel/pmvid-arm64:latest \
   -i song.mp3 -o song.mp4 --presets /work/presets
 ```
 

@@ -118,7 +118,7 @@ jobs:
       # GHCR requires a lowercase image name. github.repository keeps the
       # owner's display case, so "Antervel/pmvid" becomes "ghcr.io/antervel/pmvid".
       - name: Compute image name
-        run: echo "IMAGE_NAME=ghcr.io/${GITHUB_REPOSITORY,,}" >> "$GITHUB_ENV"
+        run: echo "IMAGE_NAME=ghcr.io/${GITHUB_REPOSITORY,,}-arm64" >> "$GITHUB_ENV"
 
       - uses: docker/setup-buildx-action@v3
 

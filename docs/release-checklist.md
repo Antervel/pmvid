@@ -94,8 +94,8 @@ docker run --rm ghcr.io/antervel/pmvid:latest --version
 GHCR arm64 check:
 
 ```sh
-docker pull ghcr.io/antervel/pmvid:latest
-docker run --rm --platform linux/arm64 ghcr.io/antervel/pmvid:latest --version
+docker pull ghcr.io/antervel/pmvid-arm64:latest
+docker run --rm --platform linux/arm64 ghcr.io/antervel/pmvid-arm64:latest --version
 ```
 
 GHCR headless render check:
